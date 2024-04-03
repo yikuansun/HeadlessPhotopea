@@ -1,0 +1,18 @@
+{
+  "name": "headlessphotopea",
+  "version": "0.0.1",
+  "description": "Use the Photopea API invisibly.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "Photopea"
+  ],
+  "author": "Yikuan Sun",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "dependencies": {
+    "puppeteer": "^22.6.2"
+  }
+}
