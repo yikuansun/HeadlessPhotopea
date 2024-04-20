@@ -135,11 +135,12 @@ class HeadlessPhotopea {
     }
 
     /**
-     * Save a screenshot to ./screenshot.png
+     * Save a debugging screenshot to file
+     * @param {string} fName Absolute path name of the file
      */
-    async screenshot() {
+    async screenshot(fName) {
         await this.page.screenshot({
-            path: __dirname + "/screenshot.png",
+            path: fName,
         });
     }
 
