@@ -78,7 +78,7 @@ class HeadlessPhotopea {
     /**
      * Open a file in Photopea.
      * @param {Buffer} buff file to load into Photopea.
-     * @returns true, once the file is loaded.
+     * @returns {boolean} true, once the file is loaded.
      */
     async addBinaryAsset(buff) {
         await this.isInitialized();
@@ -99,7 +99,7 @@ class HeadlessPhotopea {
      * Open a file in Photopea from a URL.
      * @param {*} url url of asset. make sure it can be accessed cross-origin
      * @param {boolean} asSmart open as smart object?
-     * @returns nothing lol.
+     * @returns {void}
      */
     async openFromURL(url, asSmart=true) {
         await this.isInitialized();
@@ -120,7 +120,7 @@ class HeadlessPhotopea {
      * @param {number} r Red
      * @param {number} g Green
      * @param {number} b Blue
-     * @returns i forgor :skull:
+     * @returns {Array} [ 'done' ]
      */
     async changeLayerColor(r, g, b) {
         await this.isInitialized();
@@ -159,7 +159,7 @@ class HeadlessPhotopea {
     }
 
     /**
-     * Restart the browser in an emergency situation. Deletes the faulty task.
+     * Restart the browser in an emergency situation.
      */
     async emergencyRestart() {
         this.logMessage("ERROR CAUGHT: EMERGENCY RESTART SEQUENCE INITIATED");
