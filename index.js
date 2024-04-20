@@ -28,6 +28,7 @@ class HeadlessPhotopea {
             this.browser = await puppeteer.launch({
                 headless: this.options.showBrowser?false:"new",
                 args: ["--no-sandbox"],
+                defaultViewport: null,
             });
             this.page = await this.browser.newPage();
             this.page.setDefaultTimeout(this.options.maxWaitTime);
