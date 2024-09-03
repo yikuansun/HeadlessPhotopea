@@ -62,7 +62,7 @@ class HeadlessPhotopea {
         await this.isInitialized();
         let res = await this.page.evaluate(`
             new Promise(function(resolve, reject) {
-                Photopea.runScript(photopeaFrame.contentWindow, ${JSON.stringify(script)}).then(function(out) {
+                pea.runScript(${JSON.stringify(script)}).then(function(out) {
                     for (let i = 0; i < out.length; i++) {
                         if (out[i] instanceof ArrayBuffer) {
                             out[i] = base64ArrayBuffer(out[i]);
@@ -89,7 +89,7 @@ class HeadlessPhotopea {
                 let binStr = atob(b64);
                 let bytes = new Uint8Array(binStr.length);
                 for (let i = 0; i < binStr.length; i++) bytes[i] = binStr.charCodeAt(i);
-                resolve(await Photopea.addBinaryAsset(photopeaFrame.contentWindow, bytes.buffer));
+                resolve(await pea.loadAsset(bytes.buffer));
             })
         `);
         return res;
@@ -103,35 +103,13 @@ class HeadlessPhotopea {
      */
     async openFromURL(url, asSmart=true) {
         await this.isInitialized();
-        return new Promise(async (resolve) => {
-            var layerCountOld = "done";
-            while (layerCountOld == "done") layerCountOld = (await this.runScript(`app.echoToOE(${asSmart?"app.activeDocument.layers.length":"app.documents.length"})`))[0];
-            var layerCountNew = layerCountOld;
-            await this.runScript(`app.open("${url}", null, ${asSmart});`);
-            while (layerCountNew == layerCountOld) {
-                layerCountNew = (await this.runScript(`app.echoToOE(${asSmart?"app.activeDocument.layers.length":"app.documents.length"})`))[0];
-            }
-            resolve();
-        });
-    }
-
-    /**
-     * Change the color of a Color Fill layer.
-     * @param {number} r Red
-     * @param {number} g Green
-     * @param {number} b Blue
-     * @returns {Array} [ 'done' ]
-     */
-    async changeLayerColor(r, g, b) {
-        await this.isInitialized();
         let res = await this.page.evaluate(`
             new Promise(function(resolve, reject) {
-                changeLayerColor(photopeaFrame.contentWindow, ${r}, ${g}, ${b}).then(function(out) {
+                pea.openFromURL(${JSON.stringify(url)}, ${asSmart}).then(function(out) {
                     resolve(out);
                 });
             })
         `);
-        return res;
     }
 
     /**

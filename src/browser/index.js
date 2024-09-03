@@ -1,7 +1,7 @@
-let photopeaFrame;
+let pea;
 
-Photopea.initEmbed(document.querySelector("#photopeaContainer"), JSON.stringify({})).then(async function(frame) {
-    photopeaFrame = frame;
+Photopea.createEmbed(document.querySelector("#photopeaContainer"), {}).then(async function(_pea) {
+    pea = _pea;
     
     let readyTag = document.createElement("span");
     readyTag.id = "readyTag";
