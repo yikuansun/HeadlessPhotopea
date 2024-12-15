@@ -76,7 +76,7 @@ class HeadlessPhotopea {
     }
 
     /**
-     * Open a file in Photopea.
+     * Same as loadAsset; this was kept for backwards compatibility
      * @param {Buffer} buff file to load into Photopea.
      * @returns {boolean} true, once the file is loaded.
      */
@@ -96,20 +96,51 @@ class HeadlessPhotopea {
     }
 
     /**
+     * Open a file in Photopea.
+     * @param {Buffer} buff file to load into Photopea.
+     * @returns {boolean} true, once the file is loaded.
+     */
+    async loadAsset(asset) {
+        return await this.addBinaryAsset(asset);
+    }
+
+    /**
      * Open a file in Photopea from a URL.
      * @param {*} url url of asset. make sure it can be accessed cross-origin
      * @param {boolean} asSmart open as smart object?
-     * @returns {void}
+     * @returns {boolean} true, once the file is opened.
      */
     async openFromURL(url, asSmart=true) {
         await this.isInitialized();
         let res = await this.page.evaluate(`
             new Promise(function(resolve, reject) {
-                pea.openFromURL(${JSON.stringify(url)}, ${asSmart}).then(function(out) {
+                pea.openFromURL(${JSON.stringify(url)}, ${asSmart?"true":"false"}).then(function(out) {
                     resolve(out);
                 });
             })
         `);
+        return true;
+    }
+
+    /**
+     * Return the document image as a Buffer.
+     * @param {("png" | "jpg" | "webp")} type type of image to export.
+     */
+    async exportImage(type) {
+        await this.isInitialized();
+        let res = await this.page.evaluate(`
+            new Promise(async function(resolve, reject) {
+                await pea._pause();
+                let buffer = "done";
+                while (buffer == "done") {
+                    let data = await pea.runScript("app.activeDocument.saveToOE('${type}');");
+                    buffer = data[0];
+                }
+                let b64 = base64ArrayBuffer(buffer);
+                resolve(b64);
+            })
+        `);
+        return Buffer.from(res, "base64");
     }
 
     /**
