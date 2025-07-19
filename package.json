@@ -1,18 +1,25 @@
 {
-  "name": "headlessphotopea",
-  "version": "1.1.1",
-  "description": "Use the Photopea API invisibly.",
-  "main": "src/index.js",
-  "type": "module",
-  "scripts": {
-    "test": "node test/basictest.js"
-  },
-  "keywords": [
-    "Photopea"
-  ],
-  "author": "Yikuan Sun",
-  "license": "SEE LICENSE IN LICENSE.md",
-  "dependencies": {
-    "puppeteer": "^22.6.2"
-  }
+    "name": "headlessphotopea",
+    "version": "1.1.1",
+    "description": "Use the Photopea API invisibly.",
+    "main": "src/index.js",
+    "type": "module",
+    "scripts": {
+        "test": "node test/basictest.js"
+    },
+    "keywords": [
+        "Photopea"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/yikuansun/HeadlessPhotopea.git"
+    },
+    "author": {
+        "name": "Yikuan Sun",
+        "url": "https://yikuansun.github.io"
+    },
+    "license": "SEE LICENSE IN LICENSE.md",
+    "dependencies": {
+        "puppeteer": "^22.6.2"
+    }
 }
