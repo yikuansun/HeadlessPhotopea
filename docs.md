@@ -1,8 +1,71 @@
-# headlessphotopea
+# [headlessphotopea](https://github.com/yikuansun/HeadlessPhotopea#readme)
 
 > Use the Photopea API invisibly.
 
 ## addBinaryAsset(buff)
+
+Same as loadAsset; this was kept for backwards compatibility
+
+### Parameters
+
+| Name | Types  | Description                 |
+| ---- | ------ | --------------------------- |
+| buff | Buffer | file to load into Photopea. |
+
+### Returns
+
+Promise.&lt;true&gt;
+true, once the file is loaded.
+
+## destroy()
+
+Kill this window.
+
+
+
+### Returns
+
+Promise.&lt;void&gt;
+
+
+## emergencyRestart()
+
+Restart the browser in an emergency situation.
+
+
+
+### Returns
+
+Promise.&lt;void&gt;
+
+
+## exportImage(type)
+
+Return the document image as a Buffer.
+
+### Parameters
+
+| Name | Types                | Description              |
+| ---- | -------------------- | ------------------------ |
+| type | "png", "jpg", "webp" | type of image to export. |
+
+### Returns
+
+Promise.&lt;Buffer&gt;
+image as a Buffer.
+
+## isInitialized()
+
+Wait for window to be initialized
+
+
+
+### Returns
+
+Promise.&lt;true&gt;
+true when Photopea is ready
+
+## loadAsset(buff)
 
 Open a file in Photopea.
 
@@ -14,52 +77,8 @@ Open a file in Photopea.
 
 ### Returns
 
-boolean
+Promise.&lt;true&gt;
 true, once the file is loaded.
-
-## changeLayerColor(r, g, b)
-
-Change the color of a Color Fill layer.
-
-### Parameters
-
-| Name | Types  | Description |
-| ---- | ------ | ----------- |
-| r    | number | Red         |
-| g    | number | Green       |
-| b    | number | Blue        |
-
-### Returns
-
-Array
-[ 'done' ]
-
-## destroy()
-
-Kill this window.
-
-
-
-
-
-## emergencyRestart()
-
-Restart the browser in an emergency situation.
-
-
-
-
-
-## isInitialized()
-
-Wait for window to be initialized
-
-
-
-### Returns
-
-boolean
-true when Photopea is ready
 
 ## logMessage(msg)
 
@@ -71,6 +90,9 @@ Log a message.
 | ---- | ------ | -------------------- |
 | msg  | string | Line to save to log. |
 
+### Returns
+
+void
 
 
 ## openFromURL(url, asSmart)
@@ -86,8 +108,8 @@ Open a file in Photopea from a URL.
 
 ### Returns
 
-void
-
+Promise.&lt;true&gt;
+true, once the file is opened.
 
 ## runScript(script)
 
@@ -114,6 +136,10 @@ Save a debugging screenshot to file
 | ----- | ------ | ------------------------------ |
 | fName | string | Absolute path name of the file |
 
+### Returns
+
+Promise.&lt;void&gt;
+
 Documentation generated with [doxdox](https://github.com/docsbydoxdox/doxdox)
 
-Generated on Sat Apr 20 2024 14:56:33 GMT-0400 (Eastern Daylight Time)
+Generated on Tue Dec 23 2025 11:13:32 GMT-0500 (Eastern Standard Time)

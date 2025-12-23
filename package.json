@@ -5,7 +5,8 @@
     "main": "src/index.js",
     "type": "module",
     "scripts": {
-        "test": "node test/basictest.js"
+        "test": "node test/basictest.js",
+        "create-docs": "doxdox src/index.js -o docs.md"
     },
     "keywords": [
         "Photopea"
@@ -21,5 +22,8 @@
     "license": "SEE LICENSE IN LICENSE.md",
     "dependencies": {
         "puppeteer": "^22.6.2"
+    },
+    "devDependencies": {
+        "doxdox-cli": "^4.0.0-preview.25"
     }
 }
