@@ -56,7 +56,7 @@ class HeadlessPhotopea {
     /**
      * Run a script in Photopea.
      * @param {string} script script to run.
-     * @returns {Array} output from Photopea, ending with "done". All ArrayBuffers will be converted to base 64 strings.
+     * @returns {Promise<Array>} output from Photopea, ending with "done". All ArrayBuffers will be converted to base 64 strings.
      */
     async runScript(script) {
         await this.isInitialized();
