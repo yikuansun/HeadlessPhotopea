@@ -41,7 +41,7 @@ class HeadlessPhotopea {
 
     /**
      * Wait for window to be initialized
-     * @returns {boolean} true when Photopea is ready
+     * @returns {Promise<true>} true when Photopea is ready
      */
     async isInitialized() {
         return new Promise((resolve) => {
@@ -78,7 +78,7 @@ class HeadlessPhotopea {
     /**
      * Same as loadAsset; this was kept for backwards compatibility
      * @param {Buffer} buff file to load into Photopea.
-     * @returns {boolean} true, once the file is loaded.
+     * @returns {Promise<true>} true, once the file is loaded.
      */
     async addBinaryAsset(buff) {
         await this.isInitialized();
@@ -98,7 +98,7 @@ class HeadlessPhotopea {
     /**
      * Open a file in Photopea.
      * @param {Buffer} buff file to load into Photopea.
-     * @returns {boolean} true, once the file is loaded.
+     * @returns {Promise<true>} true, once the file is loaded.
      */
     async loadAsset(asset) {
         return await this.addBinaryAsset(asset);
@@ -108,7 +108,7 @@ class HeadlessPhotopea {
      * Open a file in Photopea from a URL.
      * @param {*} url url of asset. make sure it can be accessed cross-origin
      * @param {boolean} asSmart open as smart object?
-     * @returns {boolean} true, once the file is opened.
+     * @returns {Promise<true>} true, once the file is opened.
      */
     async openFromURL(url, asSmart=true) {
         await this.isInitialized();
@@ -125,6 +125,7 @@ class HeadlessPhotopea {
     /**
      * Return the document image as a Buffer.
      * @param {("png" | "jpg" | "webp")} type type of image to export.
+     * @returns {Promise<Buffer>} image as a Buffer.
      */
     async exportImage(type) {
         await this.isInitialized();
@@ -146,6 +147,7 @@ class HeadlessPhotopea {
     /**
      * Save a debugging screenshot to file
      * @param {string} fName Absolute path name of the file
+     * @returns {Promise<void>}
      */
     async screenshot(fName) {
         await this.page.screenshot({
@@ -155,6 +157,7 @@ class HeadlessPhotopea {
 
     /**
      * Kill this window.
+     * @returns {Promise<void>}
      */
     async destroy() {
         await this.browser.close();
@@ -163,6 +166,7 @@ class HeadlessPhotopea {
     /**
      * Log a message.
      * @param {string} msg Line to save to log.
+     * @returns {void}
      */
     logMessage(msg) {
         this.options.logFunction(msg);
@@ -170,6 +174,7 @@ class HeadlessPhotopea {
 
     /**
      * Restart the browser in an emergency situation.
+     * @returns {Promise<void>}
      */
     async emergencyRestart() {
         this.logMessage("ERROR CAUGHT: EMERGENCY RESTART SEQUENCE INITIATED");
